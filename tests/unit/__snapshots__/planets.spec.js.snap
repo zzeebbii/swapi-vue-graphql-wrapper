@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Planets.vue mounted should set proper data from AJAX response [success] 1`] = `
+<div>
+  <search-stub url="http://google.com"></search-stub>
+  <div class="all-planets">
+    <card-stub title="Test 1" info="Diameter: 100 | Climate: warm"></card-stub>
+    <card-stub title="Test 2" info="Diameter: 150 | Climate: cold"></card-stub>
+  </div>
+</div>
+`;

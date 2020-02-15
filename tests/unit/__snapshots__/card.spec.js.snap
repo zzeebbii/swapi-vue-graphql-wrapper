@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card.vue renders props when passed 1`] = `
+<div class="card">
+  <div class="title">
+    <h2>Test Title</h2>
+  </div>
+  <div class="info">
+    <h3>Test Info</h3>
+  </div>
+</div>
+`;

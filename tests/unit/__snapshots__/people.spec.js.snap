@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`People.vue should render with data 1`] = `
+<div>
+  <search-stub url="http://google.com"></search-stub>
+  <div class="all-people">
+    <card-stub title="test" info="Height: 192 | Mass: 1000"></card-stub>
+  </div>
+</div>
+`;
