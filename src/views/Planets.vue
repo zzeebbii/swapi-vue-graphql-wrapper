@@ -2,7 +2,7 @@
   <div>
     <Search url=http://google.com />
     <div class="all-planets">
-      <Card v-for="person in people" :title="person.name" :info="`Height: ${person.height} | Mass: ${person.mass}`" :key="person.name" />
+      <Card v-for="planet in planets" :title="planet.name" :info="`Diameter: ${planet.diameter} | Climate: ${planet.climate}`" :key="planet.name" />
     </div>
   </div>
 </template>
@@ -11,27 +11,27 @@
 // @ is an alias to /src
 import Card from '@/components/Card.vue'
 import Search from '@/components/Search.vue';
+import axios from 'axios';
+import { BASE_URL } from '@/utils/constants';
 
 export default {
   name: 'Planets',
   data: function() {
     return {
-      people: [{
-        name: "Zohaib",
-        height: 176,
-        mass: 100,
-        hair_color: "Black",
-        skin_color: "white",
-        eye_color: "Green",
-        birth_year: 1997,
-        gender: "Male",
-        homeworld: "Lahore"
-      }]
+      planets: []
     }
   },
   components: {
     Card,
     Search
+  },
+  mounted: async function() {
+    let nextUrl = `${BASE_URL}/planets`;
+    while (nextUrl) {
+      const response = await axios.get(nextUrl);
+      this.planets = [...this.planets, ...response.data.results];
+      nextUrl = response.data.next;
+    }
   }
 }
 </script>
