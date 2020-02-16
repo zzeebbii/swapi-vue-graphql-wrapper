@@ -9,7 +9,7 @@
         :key="person.name"
       />
     </div>
-    <div v-show="isLoading" class="loader"></div>
+    <div v-if="loading" class="loader"></div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 // @ is an alias to /src
 import Card from "@/components/Card.vue";
 import Search from "@/components/Search.vue";
-import { BASE_URL } from "@/utils/constants";
+import { BASE_URL, ALL_PEOPLE_QUERY } from "@/utils/constants";
 import axios from "axios";
 
 export default {
@@ -25,21 +25,17 @@ export default {
   data: function() {
     return {
       people: [],
-      isLoading: true
+      loading: 0
     };
   },
   components: {
     Card,
     Search
   },
-  mounted: async function() {
-    let nextUrl = `${BASE_URL}/people`;
-    while (nextUrl) {
-      const response = await axios.get(nextUrl);
-      this.people = [...this.people, ...response.data.results];
-      nextUrl = response.data.next;
+  apollo: {
+    people: {
+      query: ALL_PEOPLE_QUERY
     }
-    this.isLoading = false;
   }
 };
 </script>
