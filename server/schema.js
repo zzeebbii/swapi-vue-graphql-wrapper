@@ -5,7 +5,7 @@ const typeDefs = gql`
     people: [People!]!
     person(id: ID!): People
     planets: [Planet!]!
-    planet(name: ID!): Planet
+    planet(id: ID!): Planet
   }
 
   type People @cacheControl(maxAge: 240) {

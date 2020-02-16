@@ -8,6 +8,9 @@ const addObjectID = obj => {
   return obj;
 }
 
+const getObjectId = url => parseInt(url.split('/')[5], 10);
+
 module.exports = {
-  addObjectID
+  addObjectID,
+  getObjectId
 };
