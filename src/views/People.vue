@@ -9,6 +9,7 @@
         :key="person.name"
       />
     </div>
+    <div v-show="isLoading" class="loader"></div>
   </div>
 </template>
 
@@ -23,7 +24,8 @@ export default {
   name: "People",
   data: function() {
     return {
-      people: []
+      people: [],
+      isLoading: true
     };
   },
   components: {
@@ -37,6 +39,7 @@ export default {
       this.people = [...this.people, ...response.data.results];
       nextUrl = response.data.next;
     }
+    this.isLoading = false;
   }
 };
 </script>

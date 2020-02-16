@@ -4,6 +4,7 @@
     <div class="all-planets">
       <Card v-for="planet in planets" :title="planet.name" :info="`Diameter: ${planet.diameter} | Climate: ${planet.climate}`" :key="planet.name" />
     </div>
+    <div v-show="isLoading" class="loader"></div>
   </div>
 </template>
 
@@ -18,7 +19,8 @@ export default {
   name: 'Planets',
   data: function() {
     return {
-      planets: []
+      planets: [],
+      isLoading: true
     }
   },
   components: {
@@ -32,6 +34,7 @@ export default {
       this.planets = [...this.planets, ...response.data.results];
       nextUrl = response.data.next;
     }
+    this.isLoading = false;
   }
 }
 </script>

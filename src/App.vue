@@ -30,4 +30,12 @@
     }
   }
 }
+
+.loader {
+  background: url("./assets/spinner.gif") no-repeat;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  background-size: 100px;
+}
 </style>
