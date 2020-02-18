@@ -4,6 +4,7 @@
     <div class="cards">
       <Card
         v-for="planet in planets"
+        :url="'planet/' + planet.id"
         :title="planet.name"
         :info="`Diameter: ${planet.diameter} | Climate: ${planet.climate}`"
         :key="planet.name"

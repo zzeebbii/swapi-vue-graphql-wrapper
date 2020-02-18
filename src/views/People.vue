@@ -4,6 +4,7 @@
     <div class="cards">
       <Card
         v-for="person in people"
+        :url="'person/' + person.id"
         :title="person.name"
         :info="`Height: ${person.height} | Mass: ${person.mass}`"
         :key="person.name"

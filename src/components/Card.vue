@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="navigateTo(url)">
     <div class="title">
       <h2>{{ title }}</h2>
     </div>
@@ -11,12 +11,18 @@
 
 <script>
 export default {
-  name: 'Card',
+  name: "Card",
   props: {
     title: String,
-    info: String
+    info: String,
+    url: String
+  },
+  methods: {
+    navigateTo(url) {
+      this.$router.push(url);
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
