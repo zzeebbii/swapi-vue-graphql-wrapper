@@ -13,7 +13,8 @@ class SwapiAPI {
     while (url) {
       const { data } = await axios.get(url);
       results = [...results, ...data.results];
-      url = data.next;
+      // url = data.next;
+      url = null;
     }
 
     return Array.isArray(results) ? results : [];
@@ -26,12 +27,19 @@ class SwapiAPI {
 
   async getPeople() {
     const people = await this.getObjectsFromSwapi("people");
-    return people.map(person => this.personReducer(person));
+    return Promise.all(people.map(person => this.personReducer(person)));
   }
 
   async getPersonById(id) {
     const person = await this.fetch(`${this.baseURL}/people/${id}`);
     return this.personReducer(person);
+  }
+
+  async getPersonByName(name) {
+    const { results } = await this.fetch(
+      `${this.baseURL}/people/?search=${name}`
+    );
+    return Promise.all(results.map(person => this.personReducer(person)));
   }
 
   async getPlanets() {
@@ -44,10 +52,17 @@ class SwapiAPI {
     return this.planetReducer(planet);
   }
 
+  async getPlanetByName(name) {
+    const { results } = await this.fetch(
+      `${this.baseURL}/planets/?search=${name}`
+    );
+    return results.map(planet => this.planetReducer(planet));
+  }
+
   personReducer(person) {
     return {
       ...addObjectID(person),
-      planet: this.getPlanetById(getObjectId(person.homeworld))
+      planet: this.fetch(person.homeworld)
     };
   }
 

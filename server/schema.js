@@ -2,10 +2,12 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    people: [People!]!
+    people: [People]
     person(id: ID!): People
-    planets: [Planet!]!
+    personByName(name: String!): [People]
+    planets: [Planet]
     planet(id: ID!): Planet
+    planetByName(name: String!): [Planet]
   }
 
   type People @cacheControl(maxAge: 240) {
@@ -34,7 +36,7 @@ const typeDefs = gql`
     name: String
     orbital_period: String
     population: String
-    people: [People!]!
+    people: [People]
     rotation_period: String
     surface_water: String
     terrain: String

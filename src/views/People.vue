@@ -1,15 +1,16 @@
 <template>
   <div>
-    <Search url=http://google.com />
-    <div class="all-people">
+    <Search @onSearch="onSearch" />
+    <div class="cards">
       <Card
         v-for="person in people"
+        :url="'person/' + person.id"
         :title="person.name"
         :info="`Height: ${person.height} | Mass: ${person.mass}`"
         :key="person.name"
       />
     </div>
-    <div v-show="isLoading" class="loader"></div>
+    <div v-if="loading" class="loader"></div>
   </div>
 </template>
 
@@ -17,29 +18,55 @@
 // @ is an alias to /src
 import Card from "@/components/Card.vue";
 import Search from "@/components/Search.vue";
-import { BASE_URL } from "@/utils/constants";
+import {
+  BASE_URL,
+  ALL_PEOPLE_QUERY,
+  SEARCH_PERSON_QUERY
+} from "@/utils/constants";
 import axios from "axios";
 
 export default {
   name: "People",
-  data: function() {
-    return {
-      people: [],
-      isLoading: true
-    };
+  apollo: {
+    people: {
+      query: ALL_PEOPLE_QUERY
+    },
+    person: {
+      query: SEARCH_PERSON_QUERY,
+      variables() {
+        return {
+          name: this.personToSearch
+        };
+      },
+      skip() {
+        return this.skipQuery;
+      },
+      manual: true,
+      result({ data, loading }) {
+        if (!loading) {
+          this.people = data.personByName;
+        }
+      }
+    }
   },
   components: {
     Card,
     Search
   },
-  mounted: async function() {
-    let nextUrl = `${BASE_URL}/people`;
-    while (nextUrl) {
-      const response = await axios.get(nextUrl);
-      this.people = [...this.people, ...response.data.results];
-      nextUrl = response.data.next;
+  data: function() {
+    return {
+      people: [],
+      loading: 0,
+      personToSearch: "",
+      skipQuery: true
+    };
+  },
+  methods: {
+    onSearch(name) {
+      this.personToSearch = name;
+      this.skipQuery = false;
+      this.$apollo.queries.person.refetch();
     }
-    this.isLoading = false;
   }
 };
 </script>
