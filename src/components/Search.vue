@@ -1,17 +1,19 @@
 <template>
   <div class="search">
-    <input class="serach-input" id="search-input" type="text" v-model="searchTerm" />
-    <button class="search-button" name="search-button" @click="onSearch">Search</button>
+    <form id="serach-form" v-on:submit.prevent="onSearch(searchTerm)">
+      <input class="serach-input" id="search-input" type="text" v-model="searchTerm" />
+      <button type="submit" class="search-button" name="search-button">Search</button>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Search',
+  name: "Search",
   data: function() {
     return {
       searchTerm: ""
-    }
+    };
   },
   props: {
     endpoint: String
@@ -21,13 +23,12 @@ export default {
       this.$emit("onSearch", this.searchTerm);
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .search {
-  
   .serach-input {
     -webkit-font-smoothing: antialiased;
     border: 1px solid #42b983;
