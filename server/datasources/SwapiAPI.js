@@ -13,8 +13,7 @@ class SwapiAPI {
     while (url) {
       const { data } = await axios.get(url);
       results = [...results, ...data.results];
-      // url = data.next;
-      url = null;
+      url = data.next;
     }
 
     return Array.isArray(results) ? results : [];
