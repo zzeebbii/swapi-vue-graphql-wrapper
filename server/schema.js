@@ -4,8 +4,10 @@ const typeDefs = gql`
   type Query {
     people: [People!]!
     person(id: ID!): People
+    personByName(name: String!): [People]
     planets: [Planet!]!
     planet(id: ID!): Planet
+    planetByName(name: String!): [Planet]
   }
 
   type People @cacheControl(maxAge: 240) {
