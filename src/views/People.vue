@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Search url=http://google.com />
-    <div class="all-people">
+    <Search @onSearch="onSearch" />
+    <div class="cards">
       <Card
         v-for="person in people"
         :title="person.name"
@@ -17,24 +17,54 @@
 // @ is an alias to /src
 import Card from "@/components/Card.vue";
 import Search from "@/components/Search.vue";
-import { BASE_URL, ALL_PEOPLE_QUERY } from "@/utils/constants";
+import {
+  BASE_URL,
+  ALL_PEOPLE_QUERY,
+  SEARCH_PERSON_QUERY
+} from "@/utils/constants";
 import axios from "axios";
 
 export default {
   name: "People",
-  data: function() {
-    return {
-      people: [],
-      loading: 0
-    };
+  apollo: {
+    people: {
+      query: ALL_PEOPLE_QUERY
+    },
+    person: {
+      query: SEARCH_PERSON_QUERY,
+      variables() {
+        return {
+          name: this.personToSearch
+        };
+      },
+      skip() {
+        return this.skipQuery;
+      },
+      manual: true,
+      result({ data, loading }) {
+        if (!loading) {
+          this.people = data.personByName;
+        }
+      }
+    }
   },
   components: {
     Card,
     Search
   },
-  apollo: {
-    people: {
-      query: ALL_PEOPLE_QUERY
+  data: function() {
+    return {
+      people: [],
+      loading: 0,
+      personToSearch: "",
+      skipQuery: true
+    };
+  },
+  methods: {
+    onSearch(name) {
+      this.personToSearch = name;
+      this.skipQuery = false;
+      this.$apollo.queries.person.refetch();
     }
   }
 };
