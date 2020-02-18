@@ -1,15 +1,25 @@
 <template>
   <div class="search">
-    <input class="serach-input" id="search-input" type="text" />
-    <button class="search-button" name="search-button">Search</button>
+    <input class="serach-input" id="search-input" type="text" v-model="searchTerm" />
+    <button class="search-button" name="search-button" @click="onSearch">Search</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Search',
+  data: function() {
+    return {
+      searchTerm: ""
+    }
+  },
   props: {
     endpoint: String
+  },
+  methods: {
+    onSearch(event) {
+      this.$emit("onSearch", this.searchTerm);
+    }
   }
 }
 </script>
