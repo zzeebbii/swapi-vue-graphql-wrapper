@@ -9,11 +9,13 @@ describe("Planets.vue", () => {
         return {
           planets: [
             {
+              id: 1,
               name: "Test 1",
               diameter: 100,
               climate: "warm"
             },
             {
+              id: 2,
               name: "Test 2",
               diameter: 150,
               climate: "cold"
