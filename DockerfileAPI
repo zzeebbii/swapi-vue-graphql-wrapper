@@ -1,0 +1,17 @@
+FROM node:lts-alpine
+
+RUN mkdir /app
+
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json /app/package.json
+
+RUN npm install
+
+COPY ./server /app
+
+EXPOSE 4000
+
+CMD ["node", "index.js"]

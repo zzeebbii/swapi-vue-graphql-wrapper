@@ -11,6 +11,6 @@ const server = new ApolloServer({
   })
 });
 
-server.listen().then(({ url }) => {
+server.listen(4000, '0.0.0.0').then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
