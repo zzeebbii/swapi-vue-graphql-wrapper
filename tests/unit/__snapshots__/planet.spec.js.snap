@@ -3,6 +3,7 @@
 exports[`Planet.vue should render with data 1`] = `
 <div>
   <!---->
+  <!---->
   <div class="info">
     <table>
       <tbody>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="error" v-if="error">{{ error }}</div>
     <div v-if="loading" class="loader"></div>
     <div class="info" v-if="person">
       <table>
@@ -69,7 +70,8 @@ export default {
     return {
       person: null,
       loading: 0,
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      error: null
     };
   },
   apollo: {
@@ -79,6 +81,9 @@ export default {
         return {
           id: this.id
         };
+      },
+      error(error) {
+        this.error = JSON.stringify(error.message);
       }
     }
   }

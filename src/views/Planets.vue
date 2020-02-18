@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div v-if="loading" class="loader"></div>
     <Search @onSearch="onSearch" />
+    <div class="error" v-if="error">{{ error }}</div>
     <div class="cards">
       <Card
         v-for="planet in planets"
@@ -10,7 +12,6 @@
         :key="planet.name"
       />
     </div>
-    <div v-if="loading" class="loader"></div>
   </div>
 </template>
 
@@ -28,7 +29,8 @@ export default {
       planets: [],
       loading: 0,
       planetToSearch: "",
-      skipQuery: true
+      skipQuery: true,
+      error: null
     };
   },
   components: {
@@ -37,7 +39,10 @@ export default {
   },
   apollo: {
     planets: {
-      query: ALL_PLANETS_QUERY
+      query: ALL_PLANETS_QUERY,
+      error(error) {
+        this.error = JSON.stringify(error.message);
+      }
     },
     searchPlanet: {
       query: SEARCH_PLANET_QUERY,
@@ -54,6 +59,9 @@ export default {
         if (!loading) {
           this.planets = data.planetByName;
         }
+      },
+      error(error) {
+        this.error = JSON.stringify(error.message);
       }
     }
   },

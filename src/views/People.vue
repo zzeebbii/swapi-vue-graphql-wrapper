@@ -1,6 +1,8 @@
 <template>
   <div>
+    <div v-if="loading" class="loader"></div>
     <Search @onSearch="onSearch" />
+    <div class="error" v-if="error">{{ error }}</div>
     <div class="cards">
       <Card
         v-for="person in people"
@@ -10,7 +12,6 @@
         :key="person.name"
       />
     </div>
-    <div v-if="loading" class="loader"></div>
   </div>
 </template>
 
@@ -29,7 +30,10 @@ export default {
   name: "People",
   apollo: {
     people: {
-      query: ALL_PEOPLE_QUERY
+      query: ALL_PEOPLE_QUERY,
+      error(error) {
+        this.error = JSON.stringify(error.message);
+      }
     },
     person: {
       query: SEARCH_PERSON_QUERY,
@@ -46,6 +50,9 @@ export default {
         if (!loading) {
           this.people = data.personByName;
         }
+      },
+      error(error) {
+        this.error = JSON.stringify(error.message);
       }
     }
   },
@@ -58,7 +65,8 @@ export default {
       people: [],
       loading: 0,
       personToSearch: "",
-      skipQuery: true
+      skipQuery: true,
+      error: null
     };
   },
   methods: {
