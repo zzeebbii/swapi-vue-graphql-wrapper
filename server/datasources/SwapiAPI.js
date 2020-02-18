@@ -59,11 +59,10 @@ class SwapiAPI {
     return results.map(planet => this.planetReducer(planet));
   }
 
-  async personReducer(person) {
-    // const planet = await this.getPlanetById(getObjectId(person.homeworld));
+  personReducer(person) {
     return {
       ...addObjectID(person),
-      planet: null
+      planet: this.fetch(person.homeworld)
     };
   }
 

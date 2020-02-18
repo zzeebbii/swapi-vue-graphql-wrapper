@@ -2,10 +2,10 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    people: [People!]!
+    people: [People]
     person(id: ID!): People
     personByName(name: String!): [People]
-    planets: [Planet!]!
+    planets: [Planet]
     planet(id: ID!): Planet
     planetByName(name: String!): [Planet]
   }
@@ -36,7 +36,7 @@ const typeDefs = gql`
     name: String
     orbital_period: String
     population: String
-    people: [People!]!
+    people: [People]
     rotation_period: String
     surface_water: String
     terrain: String
