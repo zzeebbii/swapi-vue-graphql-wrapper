@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Planet.vue should render with data 1`] = `
+<div>
+  <!---->
+  <div class="info">
+    <table>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>Mars</td>
+        </tr>
+        <tr>
+          <td>Climate</td>
+          <td>Cold</td>
+        </tr>
+        <tr>
+          <td>Diameter</td>
+          <td>40000</td>
+        </tr>
+        <tr>
+          <td>Gravity</td>
+          <td>Normal</td>
+        </tr>
+        <tr>
+          <td>Orbital Period</td>
+          <td>2 Year</td>
+        </tr>
+        <tr>
+          <td>Population</td>
+          <td>1000000</td>
+        </tr>
+        <tr>
+          <td>People</td>
+          <td>
+            <ul></ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Rotation Period</td>
+          <td>20000</td>
+        </tr>
+        <tr>
+          <td>Surface Water</td>
+          <td>Normal</td>
+        </tr>
+        <tr>
+          <td>Terrain</td>
+          <td>Plain</td>
+        </tr>
+        <tr>
+          <td>URL</td>
+          <td>http://swapi.co</td>
+        </tr>
+        <tr>
+          <td>Created</td>
+          <td>1990</td>
+        </tr>
+        <tr>
+          <td>Edited</td>
+          <td>2010</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

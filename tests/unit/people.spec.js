@@ -8,6 +8,7 @@ describe("People.vue", () => {
         return {
           people: [
             {
+              id: 1,
               name: "test",
               height: 192,
               mass: 1000

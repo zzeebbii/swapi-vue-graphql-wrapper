@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Person.vue should render with data 1`] = `
+<div>
+  <!---->
+  <div class="info">
+    <table>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>Test</td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td>190</td>
+        </tr>
+        <tr>
+          <td>Mass</td>
+          <td>200</td>
+        </tr>
+        <tr>
+          <td>Hair Color</td>
+          <td>Black</td>
+        </tr>
+        <tr>
+          <td>Skin Color</td>
+          <td>white</td>
+        </tr>
+        <tr>
+          <td>Eye Color</td>
+          <td>brown</td>
+        </tr>
+        <tr>
+          <td>Birth Year</td>
+          <td>1900</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>male</td>
+        </tr>
+        <tr>
+          <td>Planet</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>URL</td>
+          <td>http://swapi.co/</td>
+        </tr>
+        <tr>
+          <td>Created at</td>
+          <td>2010</td>
+        </tr>
+        <tr>
+          <td>Edited</td>
+          <td>2012</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
