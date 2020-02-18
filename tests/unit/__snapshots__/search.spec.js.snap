@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search.vue renders component when passed 1`] = `<div class="search"><input id="search-input" type="text" class="serach-input"> <button name="search-button" class="search-button">Search</button></div>`;
+exports[`Search.vue renders component when passed 1`] = `
+<div class="search">
+  <form id="serach-form"><input id="search-input" type="text" class="serach-input"> <button type="submit" name="search-button" class="search-button">Search</button></form>
+</div>
+`;
