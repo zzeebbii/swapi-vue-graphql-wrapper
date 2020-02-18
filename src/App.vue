@@ -15,6 +15,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 70%;
+  margin: 0 auto;
 }
 
 #nav {
@@ -29,6 +31,12 @@
       color: #42b983;
     }
   }
+}
+
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 .loader {

@@ -24,12 +24,12 @@ export default {
 .card {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 300px;
   border: 1px solid #42b983;
   border-radius: 5px;
-  margin: 10px auto;
+  margin: 10px;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
 
   .title {
     border-bottom: 1px solid #42b983;
