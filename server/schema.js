@@ -36,7 +36,7 @@ const typeDefs = gql`
     name: String
     orbital_period: String
     population: String
-    people: [People]
+    people: [People] @cacheControl(maxAge: 240)
     rotation_period: String
     surface_water: String
     terrain: String

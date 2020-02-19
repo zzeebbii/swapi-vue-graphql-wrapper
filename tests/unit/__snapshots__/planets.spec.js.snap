@@ -6,8 +6,8 @@ exports[`Planets.vue mounted should set proper data from AJAX response [success]
   <search-stub></search-stub>
   <!---->
   <div class="cards">
-    <card-stub title="Test 1" info="Diameter: 100 | Climate: warm" url="planet/1"></card-stub>
-    <card-stub title="Test 2" info="Diameter: 150 | Climate: cold" url="planet/2"></card-stub>
+    <card-stub title="Test 1" info="Diameter: 100 | Climate: warm" url="planets/1"></card-stub>
+    <card-stub title="Test 2" info="Diameter: 150 | Climate: cold" url="planets/2"></card-stub>
   </div>
 </div>
 `;

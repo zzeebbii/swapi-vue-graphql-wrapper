@@ -30,7 +30,7 @@
 
 table {
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 
   td {
@@ -54,4 +54,14 @@ table {
   z-index: 10;
   background-color: rgba($color: #fff, $alpha: 0.5);
   background-position: center;
+}
+
+.error {
+  margin: 10px;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
 }

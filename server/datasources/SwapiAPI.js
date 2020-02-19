@@ -1,76 +1,68 @@
-const axios = require("axios");
+const { RESTDataSource } = require("apollo-datasource-rest");
 const { addObjectID, getObjectId } = require("../utils/helpers");
 
-class SwapiAPI {
+class SwapiAPI extends RESTDataSource {
   constructor() {
+    super();
     this.baseURL = "https://swapi.co/api";
   }
 
   async getObjectsFromSwapi(swapiObject) {
-    let url = `${this.baseURL}/${swapiObject}/?page=1`;
-    let results = [];
+    let url = `/${swapiObject}/?page=1`;
+    let response = [];
 
     while (url) {
-      const { data } = await axios.get(url);
-      results = [...results, ...data.results];
-      url = data.next;
+      const { results, next } = await this.get(url);
+      response = [...response, ...results];
+      url = next;
     }
 
-    return Array.isArray(results) ? results : [];
-  }
-
-  async fetch(url) {
-    const { data } = await axios.get(url);
-    return data;
+    return Array.isArray(response) ? response : [];
   }
 
   async getPeople() {
     const people = await this.getObjectsFromSwapi("people");
-    return Promise.all(people.map(person => this.personReducer(person)));
+    return Promise.all(people.map(person => this.objectReducerWithId(person)));
   }
 
   async getPersonById(id) {
-    const person = await this.fetch(`${this.baseURL}/people/${id}`);
-    return this.personReducer(person);
+    const person = await this.get(`/people/${id}`);
+    return this.objectReducerWithId(person);
   }
 
   async getPersonByName(name) {
-    const { results } = await this.fetch(
-      `${this.baseURL}/people/?search=${name}`
-    );
-    return Promise.all(results.map(person => this.personReducer(person)));
+    const { results } = await this.get(`/people/?search=${name}`);
+    return Promise.all(results.map(person => this.objectReducerWithId(person)));
   }
 
   async getPlanets() {
     const planets = await this.getObjectsFromSwapi("planets");
-    return planets.map(planet => this.planetReducer(planet));
+    return planets.map(planet => this.objectReducerWithId(planet));
   }
 
   async getPlanetById(id) {
-    const planet = await this.fetch(`${this.baseURL}/planets/${id}`);
-    return this.planetReducer(planet);
+    const planet = await this.get(`/planets/${id}`);
+    return this.objectReducerWithId(planet);
   }
 
   async getPlanetByName(name) {
-    const { results } = await this.fetch(
-      `${this.baseURL}/planets/?search=${name}`
-    );
-    return results.map(planet => this.planetReducer(planet));
+    const { results } = await this.get(`/planets/?search=${name}`);
+    return results.map(planet => this.objectReducerWithId(planet));
   }
 
-  personReducer(person) {
-    return {
-      ...addObjectID(person),
-      planet: this.fetch(person.homeworld)
-    };
+  async getPersonByUrl(url) {
+    const planet = await this.get(url);
+    return this.objectReducerWithId(planet);
   }
 
-  planetReducer(planet) {
+  async getPlanetByUrl(url) {
+    const planet = await this.get(url);
+    return this.objectReducerWithId(planet);
+  }
+
+  objectReducerWithId(object) {
     return {
-      ...addObjectID(planet),
-      people: Promise.all(
-        planet.residents.map(p => this.getPersonById(getObjectId(p)))
-      )
+      ...addObjectID(object)
     };
   }
 }

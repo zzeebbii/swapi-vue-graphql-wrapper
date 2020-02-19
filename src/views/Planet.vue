@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="error" v-if="error">{{ error }}</div>
+
     <div v-if="loading" class="loader"></div>
+
     <div class="info" v-if="planet">
       <table>
         <tbody>
@@ -68,32 +70,30 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 import { SINGLE_PLANET_QUERY } from "@/utils/constants";
 
 export default {
   name: "Planet",
-  data() {
-    return {
-      planet: null,
-      loading: 0,
-      id: this.$route.params.id,
-      error: null
-    };
-  },
   apollo: {
     planet: {
       query: SINGLE_PLANET_QUERY,
       variables() {
         return {
           id: this.id
-        }
+        };
       },
       error(error) {
         this.error = JSON.stringify(error.message);
       }
     }
+  },
+  data() {
+    return {
+      error: null,
+      id: this.$route.params.id,
+      loading: 0,
+      planet: null
+    };
   }
 };
 </script>
