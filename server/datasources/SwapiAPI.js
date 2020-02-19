@@ -7,8 +7,7 @@ class SwapiAPI extends RESTDataSource {
     this.baseURL = "https://swapi.co/api";
   }
 
-  async getObjectsFromSwapi(swapiObject) {
-    let url = `/${swapiObject}/?page=1`;
+  async getAllObjectsFromSwapi(url) {
     let response = [];
 
     while (url) {
@@ -21,7 +20,7 @@ class SwapiAPI extends RESTDataSource {
   }
 
   async getPeople() {
-    const people = await this.getObjectsFromSwapi("people");
+    const people = await this.getAllObjectsFromSwapi("people/?page=1");
     return Promise.all(people.map(person => this.objectReducerWithId(person)));
   }
 
@@ -31,12 +30,12 @@ class SwapiAPI extends RESTDataSource {
   }
 
   async getPersonByName(name) {
-    const { results } = await this.get(`/people/?search=${name}`);
-    return Promise.all(results.map(person => this.objectReducerWithId(person)));
+    const people = await this.getAllObjectsFromSwapi(`/people/?search=${name}`);
+    return Promise.all(people.map(person => this.objectReducerWithId(person)));
   }
 
   async getPlanets() {
-    const planets = await this.getObjectsFromSwapi("planets");
+    const planets = await this.getAllObjectsFromSwapi("planets/?page1");
     return planets.map(planet => this.objectReducerWithId(planet));
   }
 
@@ -46,8 +45,8 @@ class SwapiAPI extends RESTDataSource {
   }
 
   async getPlanetByName(name) {
-    const { results } = await this.get(`/planets/?search=${name}`);
-    return results.map(planet => this.objectReducerWithId(planet));
+    const planets = await this.getAllObjectsFromSwapi(`/planets/?search=${name}`);
+    return planets.map(planet => this.objectReducerWithId(planet));
   }
 
   async getPersonByUrl(url) {
