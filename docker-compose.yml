@@ -1,0 +1,20 @@
+version: '3'
+services:
+  vue-frontend:
+    depends_on:
+      - backend-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VUE_APP_API_URL: http://backend-api:4000
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+  backend-api:
+    build:
+      context: .
+      dockerfile: DockerfileAPI
+    ports:
+      - "4000:4000"

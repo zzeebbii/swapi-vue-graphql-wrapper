@@ -8,9 +8,10 @@ import VueApollo from "vue-apollo";
 
 Vue.config.productionTip = false;
 
+const API_URL = process.env.VUE_APP_API_URL || "http://localhost:4000";
+
 const httpLink = new HttpLink({
-  // You should use an absolute URL here
-  uri: "http://localhost:4000"
+  uri: API_URL
 });
 
 const apolloClient = new ApolloClient({
