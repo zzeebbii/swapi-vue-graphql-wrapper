@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <form id="serach-form" v-on:submit.prevent="onSearch(searchTerm)">
-      <input class="serach-input" id="search-input" type="text" v-model="searchTerm" />
+      <input type="text" class="serach-input" id="search-input" v-model="searchTerm" />
       <button type="submit" class="search-button" name="search-button">Search</button>
     </form>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     onSearch(event) {
-      this.$emit("onSearch", this.searchTerm);
+      this.searchTerm && this.$emit("onSearch", this.searchTerm);
     }
   }
 };
