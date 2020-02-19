@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="error" v-if="error">{{ error }}</div>
+
     <div v-if="loading" class="loader"></div>
+
     <div class="info" v-if="person">
       <table>
         <tbody>
@@ -60,20 +62,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 import { SINGLE_PERSON_QUERY } from "@/utils/constants";
 
 export default {
   name: "Person",
-  data() {
-    return {
-      person: null,
-      loading: 0,
-      id: this.$route.params.id,
-      error: null
-    };
-  },
   apollo: {
     person: {
       query: SINGLE_PERSON_QUERY,
@@ -86,6 +78,14 @@ export default {
         this.error = JSON.stringify(error.message);
       }
     }
+  },
+  data() {
+    return {
+      error: null,
+      id: this.$route.params.id,
+      loading: 0,
+      person: null
+    };
   }
 };
 </script>

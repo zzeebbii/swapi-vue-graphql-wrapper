@@ -19,12 +19,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "people" */ '../views/Planets.vue')
   },
   {
-    path: '/person/:id',
+    path: '/people/:id',
     name: 'Person',
     component: () => import(/* webpackChunkName: "person" */ '../views/Person.vue')
   },
   {
-    path: '/planet/:id',
+    path: '/planets/:id',
     name: 'Planet',
     component: () => import(/* webpackChunkName: "planet" */ '../views/Planet.vue')
   }

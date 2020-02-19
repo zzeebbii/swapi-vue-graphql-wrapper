@@ -1,30 +1,31 @@
 <template>
   <div>
     <div v-if="loading" class="loader"></div>
+
     <Search @onSearch="onSearch" />
+
     <div class="error" v-if="error">{{ error }}</div>
+
     <div class="cards">
       <Card
         v-for="person in people"
-        :url="'person/' + person.id"
+        :url="'people/' + person.id"
         :title="person.name"
         :info="`Height: ${person.height} | Mass: ${person.mass}`"
-        :key="person.name"
+        :key="person.id"
       />
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Card from "@/components/Card.vue";
 import Search from "@/components/Search.vue";
+
 import {
-  BASE_URL,
   ALL_PEOPLE_QUERY,
   SEARCH_PERSON_QUERY
 } from "@/utils/constants";
-import axios from "axios";
 
 export default {
   name: "People",
@@ -37,6 +38,7 @@ export default {
     },
     person: {
       query: SEARCH_PERSON_QUERY,
+      manual: true,
       variables() {
         return {
           name: this.personToSearch
@@ -45,7 +47,6 @@ export default {
       skip() {
         return this.skipQuery;
       },
-      manual: true,
       result({ data, loading }) {
         if (!loading) {
           this.people = data.personByName;
@@ -62,11 +63,11 @@ export default {
   },
   data: function() {
     return {
-      people: [],
+      error: null,
       loading: 0,
+      people: [],
       personToSearch: "",
-      skipQuery: true,
-      error: null
+      skipQuery: true
     };
   },
   methods: {
