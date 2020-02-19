@@ -6,7 +6,7 @@ exports[`People.vue should render with data 1`] = `
   <search-stub></search-stub>
   <!---->
   <div class="cards">
-    <card-stub title="test" info="Height: 192 | Mass: 1000" url="person/1"></card-stub>
+    <card-stub title="test" info="Height: 192 | Mass: 1000" url="people/1"></card-stub>
   </div>
 </div>
 `;
