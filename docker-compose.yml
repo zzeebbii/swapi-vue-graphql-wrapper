@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        VUE_APP_API_URL: http://backend-api:4000
+        VUE_APP_API_URL: http://localhost:4000
     expose:
       - "80"
     ports:
